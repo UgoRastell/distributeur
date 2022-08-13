@@ -6,36 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@700&family=Roboto:wght@900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
+    <!-- balise pour le haut de page -->
     <header>
-        <div class="title-box">
-            <!-- logo -->
-            <h1>NWS-Snack</h1>
 
-            <!-- slogan -->
-            <p>FFFFFFFFFFFFF</p>
+        <div class="title-box">
+            <!-- titre pour ma page -->
+            <h1>NWS</h1>
+            <!-- slogan pour ma page -->
+            <p>FFFFFFFFFFFFFFFFFF</p>
         </div>
 
-        <!-- slider image -->
+        <!-- slider d'images -->
         <div class="slider">
             <div class="slides">
-                <div class="slide"><img src="images/logo_nws.svg" alt=""></div>
-                <div class="slide"><img src="images/logo_nws.svg" alt=""></div>
-                <div class="slide"><img src="images/logo_nws.svg" alt=""></div>
+                <div class="slide"><img src="images/snacks.jpeg"></div>
+                <div class="slide"><img src="images/snacks.jpeg"></div>
+                <div class="slide"><img src="images/snacks.jpeg"></div>
+                <div class="slide"><img src="images/snacks.jpeg"></div>
             </div>
         </div>
 
     </header>
 
-    <!-- menue de navigation -->
-    <nav>
-        <ul>
-            <li>Snacks</li>
-            <li>Boissons</li>
-            <li>Plats</li>
-        </ul>
-    </nav>
+    <div id="sticky-header" class="section-menu">
+        <!-- menu de navigation -->
+        <nav class="menu">
+            <ul>
+                <li class="nav-item snack"><a href="#snack">Snacks</a></li>
+                <li class="nav-item plat"><a href="#plat">Plats</a></li>
+                <li class="nav-item boisson"><a href="#boisson">Boissons</a></li>
+            </ul>
+        </nav>
+    </div>
+
+        <!-- section snack -->
+        <section id="snack" class="snack">
+
+            <div class="item">
+                <img src="images/snacks.jpeg">
+                <div class="item-infos">
+                    <h3>Caprapiquante</h3>
+                    <hr>
+                    <p>Chevre, Miel, Graines toastés, piment rouge</p>
+                    <p class="prix">12€00</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="images/snacks.jpeg">
+                <div class="item-infos">
+                    <h3>Strategia</h3>
+                    <hr>
+                    <p>Tomates, Mozerlla, Basilique</p>
+                    <p class="prix">9€00</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="images/snacks.jpeg">
+                <div class="item-infos">
+                    <h3>Naturale</h3>
+                    <hr>
+                    <p>Chèvre, courgettes, basilique, carottes, huile vegetale</p>
+                    <p class="prix">10€00</p>
+                </div>
+            </div>
+
+        </section>
+
+
 </body>
 </html>
