@@ -1,12 +1,4 @@
 <?php
 
-$user = 'root';
-$password = '';
+$db = mysqli_connect("localhost","root","","distributeur_nws");
 
-try {
-    $db = new PDO ('mysql:host=localhost;dbname=distributeur_nws', $user,$password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOExeption $exc) {
-    echo 'Error: ' . $exc->getMessage();
-    exit();
-}?>
