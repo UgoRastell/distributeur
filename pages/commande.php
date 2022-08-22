@@ -17,25 +17,25 @@
                   //si une image a été télécharger:
                   $img_nom = $_FILES['image']['name']; //récupère le nom de l'image 
                   $tmp_nom = $_FILES['image']['tmp_name']; //définire un nom temporaire
+                  $time =time(); //On recupere l'heure actuelle
                   //On renomme l'image
 
-                  $nouveau_nom_img = $img_nom ;
+                  $nouveau_nom_img = $time.$img_nom ;
 
                   //On déplace l'image dans le dossier images-produits
 
                   $deplacer_image = move_uploaded_file($tmp_nom,"../images/".$nouveau_nom_img) ;
 
                   if($deplacer_image){
-                      //si l'image a été déplacé 
+                      //si l'image a été déplacé :
                       //insérons le titre ,la description  et le nom de l'image dans la base de donnée 
-                      $req2 = mysqli_query($bd,"INSERT INTO `produits` (nom_produit, descri, image_produit, categories) VALUES ('$titre','$description','$nouveau_nom_img', 'test')") ;
-
+                      $req2 = mysqli_query($bd,"INSERT INTO produits VALUES (NULL,'$titre','$description','$nouveau_nom_img')") ;
                        if($req2){
                            //si les informations ont été inséré dans la base de données
                            $message = '<p style="color:green">Produit ajouté ! </p>';
                        }else {
                            //si non
-                           $message = '<p style="color:red ">Produit non ajouté !</p>';
+                           $message = '<p style="color:red ">Produit Non ajouté !</p>';
                        }
                   }
 
@@ -61,7 +61,7 @@
 </head>
 <body>
   <section class="input_add">
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="" >
       <div class="message">
         <?php if(isset($message)){
           echo $message;
@@ -69,14 +69,13 @@
         
         ?>
       </div>
-        <label>Nom du produit</label>
+        <label>Nom Prénom</label>
         <input type="text" name="titre">
-        <label>Description du produit</label>
+        <label>Nom du produit</label>
         <textarea name="description" cols="30" rows="10"></textarea>
-        <label>Ajouter une image</label>
-        <input type="file" name="image">
-        <input type="submit" value="Ajouter" name="btn-ajouter"/>
-        <a class="btn-liste-prod" href="action.php">Liste des produits</a>
+        <label>Quantité</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="5">
+        <input type="submit" value="Acheter" name="btn-ajouter"/>
     </form>
   </section>
 
