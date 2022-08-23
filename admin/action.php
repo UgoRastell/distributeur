@@ -31,8 +31,9 @@
                                 </div>
                                 <div class="text">
                                     <strong><p class="titre">'.$row['nom_produit'].'</p></strong>
+                                    <p class="prix">'.$row['prix'].' €</p>
                                     <p class="description">'.$row['descri'].'</p>
-                                    <input type="submit" value="Commander" name="btn-ajouter"/>
+                                    <p class="categorie">'."CATEGORIE : ".$row['categories'].'</p>
                                 </div>
                            </div>
                            ';

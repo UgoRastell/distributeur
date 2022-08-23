@@ -11,6 +11,7 @@
     <div class="result">
        <div class="result-content">
             <h3>liste des produits</h3>
+            <a href="pages/commande.php">Commander</a>
             <div class="liste-produits">
                 <?php 
                  //Nous allons afficher tous les produits ajouté :
@@ -26,11 +27,13 @@
                            echo ' 
                            <div class="produit">
                                 <div class="image-prod">
-                                        <img src="images-produits/'.$row['image'].'" alt=""> 
+                                        <img src="images/'.$row['image_produit'].'" alt=""> 
                                 </div>
                                 <div class="text">
-                                    <strong><p class="titre">'.$row['titre'].'</p></strong>
-                                    <p class="description">'.$row['descrip'].'</p>
+                                    <strong><p class="titre">'.$row['nom_produit'].'</p></strong>
+                                    <p class="description">'.$row['descri'].'</p>
+                                    <p class="prix">'.$row['prix'].' €</p>
+                                    <p class="categorie">'."CATEGORIE : ".$row['categories'].'</p>
                                 </div>
                            </div>
                            ';

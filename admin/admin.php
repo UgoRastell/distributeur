@@ -5,7 +5,9 @@
       //recupération des données du formulaire
       $titre = $_POST['titre'];
       $description = $_POST['description'];
-      if(!empty($titre) && !empty($description)){
+      $prix = $_POST['prix'];
+      $categorie = $_POST['categorie'];
+      if(!empty($titre) && !empty($description) && !empty($prix)){
           //verifier si le produit existe déjà dans la base de données
           $req1 = mysqli_query($bd, "SELECT nom_produit ,descri FROM produits WHERE nom_produit ='$titre' AND descri ='$description'");
           if(mysqli_num_rows($req1) > 0) {
@@ -28,7 +30,7 @@
                   if($deplacer_image){
                       //si l'image a été déplacé 
                       //insérons le titre ,la description  et le nom de l'image dans la base de donnée 
-                      $req2 = mysqli_query($bd,"INSERT INTO `produits` (nom_produit, descri, image_produit, categories) VALUES ('$titre','$description','$nouveau_nom_img', 'test')") ;
+                      $req2 = mysqli_query($bd,"INSERT INTO `produits` (nom_produit, descri, image_produit, categories, prix) VALUES ('$titre','$description','$nouveau_nom_img', '$categorie', '$prix')") ;
 
                        if($req2){
                            //si les informations ont été inséré dans la base de données
@@ -69,10 +71,18 @@
         
         ?>
       </div>
+        <label>Catégories</label>
+        <select name="categorie">
+          <option value="boisson">boisson</option>
+          <option value="plat">plat</option>
+          <option value="snack">snack</option>
+        </select>
         <label>Nom du produit</label>
         <input type="text" name="titre">
         <label>Description du produit</label>
         <textarea name="description" cols="30" rows="10"></textarea>
+        <label>Prix en €</label>
+        <input type="number" name="prix" min="1">
         <label>Ajouter une image</label>
         <input type="file" name="image">
         <input type="submit" value="Ajouter" name="btn-ajouter"/>
