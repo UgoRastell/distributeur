@@ -11,14 +11,15 @@
 <body>
   <section class="input_add">
     <form method="post" action="achat.php" id="myForm">
+        <p style="color: red;" id="erreur"></p>
         <label>Nom</label>
-        <input type="text" name="nom">
+        <input type="text" name="nom" id="nom">
         <label>Prénom</label>
-        <input type="text" name="prenom">
+        <input type="text" name="prenom" id="prenom">
         <label>Selection du produit</label>
         <?php
         $bd = mysqli_connect("localhost","root","","distributeur_nws");
-        $req3 = mysqli_query($bd, "SELECT * FROM `produits`");
+        $req3 = mysqli_query($bd, "SELECT * FROM `produits` ORDER BY `nom_produit`");
         if(mysqli_num_rows($req3) == 0){
           echo ' <select name="categorie">
                   <option value="">Aucun produit trouvé</option>;
@@ -27,16 +28,14 @@
           echo '<select name="categorie">';
           while($row = mysqli_fetch_assoc($req3)){
             echo'
-              <option value="' . $row['nom_produit'] . '">' .$row['nom_produit'] .'</option>
-              <option value="plat">plat</option>
-              <option value="snack">snack</option>
+              <option value="">'.$row['nom_produit'] . " ". $row['prix'] . '€' .' </option>
             ';
           }
           echo' </select>';
         }
         ?>
         <label>Quantité</label>
-        <input type="number" name="quantity" min="1" max="5">
+        <input type="number" name="quantity" min="1" max="5" id="quant">
         <input type="submit" value="Acheter" name="btn-ajouter"/>
     </form>
   </section>
