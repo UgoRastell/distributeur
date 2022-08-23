@@ -1,3 +1,27 @@
+<?php
+if(isset($_POST['acheter'])){
+  //connexion à la base de données
+  $bd = mysqli_connect("localhost","root","","distributeur_nws");
+  //recupération des données du formulaire
+  $nom = $_POST['nom'];
+  $prenom = $_POST['prenom'];
+  $quant = $_POST['quant'];
+  $achat =
+  $select = $_POST['categorie'];
+
+  $req4 = mysqli_query($bd,"INSERT INTO `commande` (nom_produit, quantite_produit, image_produit, categories, prix) VALUES ('$titre','$description','$nouveau_nom_img', '$categorie', '$prix')") ;
+
+
+
+
+}
+
+
+
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,10 +49,10 @@
                   <option value="">Aucun produit trouvé</option>;
                   </select>';
         }else{
-          echo '<select name="categorie">';
+          echo '<select name="categorie" onchange="calculateAmount(this.value)">';
           while($row = mysqli_fetch_assoc($req3)){
             echo'
-              <option value="">'.$row['nom_produit'] . " ". $row['prix'] . '€' .' </option>
+              <option value="'. $row['prix'] . '">'.$row['nom_produit'] .' </option>
             ';
           }
           echo' </select>';
@@ -36,9 +60,22 @@
         ?>
         <label>Quantité</label>
         <input type="number" name="quantity" min="1" max="5" id="quant">
-        <input type="submit" value="Acheter" name="btn-ajouter"/>
+        <label>Total</label>
+        <input name="tot_amount" id="tot_amount" type="text" readonly>
+        <input type="submit" value="Acheter" name="acheter"/>
+
+        <script>
+          function calculateAmount(val) {
+                var tot_price = val;
+                /*display the result*/
+                var divobj = document.getElementById('tot_amount');
+                divobj.value = tot_price;
+            }
+        </script>
     </form>
   </section>
+
+
 
 <script src="../js/val.js"></script>
 

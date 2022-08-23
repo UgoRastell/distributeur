@@ -13,7 +13,7 @@ document.getElementById("myForm").addEventListener("submit", function(e) {
         document.getElementById("erreur").innerHTML = erreur;
         return false;
     }else{
-        header('location:achat.php');
+        
     }
 });
 
