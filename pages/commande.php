@@ -5,11 +5,16 @@ if(isset($_POST['acheter'])){
   //recupération des données du formulaire
   $nom = $_POST['nom'];
   $prenom = $_POST['prenom'];
-  $quant = $_POST['quant'];
-  $achat =
-  $select = $_POST['categorie'];
+  $quant = $_POST['quantity'];
+  $nom_produit = $_POST['id'];
 
-  $req4 = mysqli_query($bd,"INSERT INTO `commande` (nom_produit, quantite_produit, image_produit, categories, prix) VALUES ('$titre','$description','$nouveau_nom_img', '$categorie', '$prix')") ;
+  $req4 = mysqli_query($bd,"INSERT INTO `commande` (nom_etudiant, prenom_etudiant, nom_produit, quantite_produit, achat) VALUES ('$nom','$prenom', '$nom_produit', '$quant', '$achat')");
+
+  if($req4) {
+    $message = '<p style="color:green">Produit acheté ! </p>';
+  }else {
+    $message = '<p style="color:red">Produit non acheté ! </p>';
+  }
 
 
 
@@ -34,7 +39,13 @@ if(isset($_POST['acheter'])){
 </head>
 <body>
   <section class="input_add">
-    <form method="post" action="achat.php" id="myForm">
+    <form method="post" action="" id="myForm">
+      <div class="message">
+          <?php if(isset($message)){
+            echo $message;
+          }
+          ?>
+        </div>
         <p style="color: red;" id="erreur"></p>
         <label>Nom</label>
         <input type="text" name="nom" id="nom">
@@ -43,35 +54,27 @@ if(isset($_POST['acheter'])){
         <label>Selection du produit</label>
         <?php
         $bd = mysqli_connect("localhost","root","","distributeur_nws");
-        $req3 = mysqli_query($bd, "SELECT * FROM `produits` ORDER BY `nom_produit`");
+        $req3 = mysqli_query($bd, "SELECT * FROM `produits`");
         if(mysqli_num_rows($req3) == 0){
-          echo ' <select name="categorie">
+          echo ' <select name="nom_produit">
                   <option value="">Aucun produit trouvé</option>;
                   </select>';
         }else{
-          echo '<select name="categorie" onchange="calculateAmount(this.value)">';
+          echo '<select name="nom_produit"> ';
           while($row = mysqli_fetch_assoc($req3)){
             echo'
-              <option value="'. $row['prix'] . '">'.$row['nom_produit'] .' </option>
-            ';
+              <option value="'.$row['id'] .'">'.$row['nom_produit'] .' </option>
+              ';
+            
           }
           echo' </select>';
         }
         ?>
+        <label>Prix</label>
+        <input type="text" name="prix" value="" readonly>
         <label>Quantité</label>
         <input type="number" name="quantity" min="1" max="5" id="quant">
-        <label>Total</label>
-        <input name="tot_amount" id="tot_amount" type="text" readonly>
         <input type="submit" value="Acheter" name="acheter"/>
-
-        <script>
-          function calculateAmount(val) {
-                var tot_price = val;
-                /*display the result*/
-                var divobj = document.getElementById('tot_amount');
-                divobj.value = tot_price;
-            }
-        </script>
     </form>
   </section>
 

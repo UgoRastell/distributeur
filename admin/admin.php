@@ -68,7 +68,6 @@
         <?php if(isset($message)){
           echo $message;
         }
-        
         ?>
       </div>
         <label>Catégories</label>
