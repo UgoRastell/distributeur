@@ -19,7 +19,7 @@
                    $bd = mysqli_connect("localhost","root","","distributeur_nws");
                    $req3 = mysqli_query($bd , "SELECT * FROM produits");
                    if(mysqli_num_rows($req3) == 0){
-                      //si la base de donnée ne contient aucun produit , alors affichons :
+                      //si la base de donnée ne contient aucun produit
                       echo " Aucun produit trouvé";
                    }else {//si oui
                        while($row = mysqli_fetch_assoc($req3)){

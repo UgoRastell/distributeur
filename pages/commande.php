@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_POST['acheter'])){
   //connexion à la base de données
   $bd = mysqli_connect("localhost","root","","distributeur_nws");
@@ -6,14 +7,15 @@ if(isset($_POST['acheter'])){
   $nom = $_POST['nom'];
   $prenom = $_POST['prenom'];
   $quant = $_POST['quantity'];
-  $nom_produit = $_POST['id'];
+  $nom_prod = $_POST['nom_produit'];
 
-  $req4 = mysqli_query($bd,"INSERT INTO `commande` (nom_etudiant, prenom_etudiant, nom_produit, quantite_produit, achat) VALUES ('$nom','$prenom', '$nom_produit', '$quant', '$achat')");
+  //inserer le titre ,la description  et le nom de l'image dans la base de donnée 
+  $req4 = mysqli_query($bd,"INSERT INTO `commande` (nom_etudiant, prenom_etudiant, nom_produit, quantite_produit) VALUES ('$nom','$prenom','$nom_prod','$quant')");
 
   if($req4) {
     $message = '<p style="color:green">Produit acheté ! </p>';
   }else {
-    $message = '<p style="color:red">Produit non acheté ! </p>';
+    
   }
 
 
@@ -45,7 +47,7 @@ if(isset($_POST['acheter'])){
             echo $message;
           }
           ?>
-        </div>
+      </div>
         <p style="color: red;" id="erreur"></p>
         <label>Nom</label>
         <input type="text" name="nom" id="nom">
@@ -53,7 +55,9 @@ if(isset($_POST['acheter'])){
         <input type="text" name="prenom" id="prenom">
         <label>Selection du produit</label>
         <?php
+        //connexion à la base de données
         $bd = mysqli_connect("localhost","root","","distributeur_nws");
+        //inserer le titre ,la description  et le nom de l'image dans la base de donnée 
         $req3 = mysqli_query($bd, "SELECT * FROM `produits`");
         if(mysqli_num_rows($req3) == 0){
           echo ' <select name="nom_produit">
@@ -62,23 +66,20 @@ if(isset($_POST['acheter'])){
         }else{
           echo '<select name="nom_produit"> ';
           while($row = mysqli_fetch_assoc($req3)){
+            //afficher les informations
             echo'
-              <option value="'.$row['id'] .'">'.$row['nom_produit'] .' </option>
+              <option value="'.$row['nom_produit'].'">'.$row['nom_produit'] .' </option>
               ';
             
           }
           echo' </select>';
         }
         ?>
-        <label>Prix</label>
-        <input type="text" name="prix" value="" readonly>
         <label>Quantité</label>
-        <input type="number" name="quantity" min="1" max="5" id="quant">
+        <input type="number" name="quantity" min="1" max="5">
         <input type="submit" value="Acheter" name="acheter"/>
     </form>
   </section>
-
-
 
 <script src="../js/val.js"></script>
 

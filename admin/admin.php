@@ -85,10 +85,10 @@
         <label>Ajouter une image</label>
         <input type="file" name="image">
         <input type="submit" value="Ajouter" name="btn-ajouter"/>
-        <a class="btn-liste-prod" href="action.php">Liste des produits</a>
+        <a class="btn-liste-prod" href="action.php">Liste des commandes</a>
     </form>
   </section>
-
+<script src="../js/val.js"></script>
 
 </body>
 </html>
