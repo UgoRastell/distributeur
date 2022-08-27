@@ -45,6 +45,7 @@ if(isset($_POST['delete'])) {
                                             <strong><p class="titre">'.$row['prenom_etudiant'] . " " . $row['nom_etudiant'].'</p></strong>
                                             <p class="titre">'.$row['nom_produit'].'</p>
                                             <p class="titre">'.$row['quantite_produit'].'</p>
+                                            <p class="titre">'.$row['achat'].' €</p>
                                             <input type="submit" value="Supprimer" name="delete"/>
                                         </div>
                                 </div>

@@ -2,14 +2,18 @@
   if(isset($_POST['btn-ajouter'])){
       //connexion à la base de données
       $bd = mysqli_connect("localhost","root","","distributeur_nws");
+
       //recupération des données du formulaire
       $titre = $_POST['titre'];
       $description = $_POST['description'];
       $prix = $_POST['prix'];
       $categorie = $_POST['categorie'];
+
       if(!empty($titre) && !empty($description) && !empty($prix)){
+        
           //verifier si le produit existe déjà dans la base de données
           $req1 = mysqli_query($bd, "SELECT nom_produit ,descri FROM produits WHERE nom_produit ='$titre' AND descri ='$description'");
+
           if(mysqli_num_rows($req1) > 0) {
               //si le produit existe déjà:
               $message = '<p style="color:red" >Le produit existe déjà</p>';
@@ -19,17 +23,17 @@
                   //si une image a été télécharger:
                   $img_nom = $_FILES['image']['name']; //récupère le nom de l'image 
                   $tmp_nom = $_FILES['image']['tmp_name']; //définire un nom temporaire
-                  //On renomme l'image
+                  
+                  //renomme l'image
 
                   $nouveau_nom_img = $img_nom ;
 
-                  //On déplace l'image dans le dossier images-produits
+                  //déplace l'image dans le dossier images-produits
 
                   $deplacer_image = move_uploaded_file($tmp_nom,"../images/".$nouveau_nom_img) ;
 
                   if($deplacer_image){
-                      //si l'image a été déplacé 
-                      //insérons le titre ,la description  et le nom de l'image dans la base de donnée 
+                      //inserer le titre ,la description  et le nom de l'image dans la base de donnée 
                       $req2 = mysqli_query($bd,"INSERT INTO `produits` (nom_produit, descri, image_produit, categories, prix) VALUES ('$titre','$description','$nouveau_nom_img', '$categorie', '$prix')") ;
 
                        if($req2){
@@ -44,7 +48,7 @@
               }
           }
       }else {
-          //si tous les champs ne sont pas remplie on a :
+          //si tous les champs ne sont pas remplie
         $message = '<p style="color:red">Veuillez remplir tous les champs !</p>';
       }
   }

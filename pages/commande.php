@@ -4,28 +4,32 @@ if(isset($_POST['acheter'])){
   //connexion à la base de données
   $bd = mysqli_connect("localhost","root","","distributeur_nws");
   //recupération des données du formulaire
+  $id = $_POST['id'];
   $nom = $_POST['nom'];
   $prenom = $_POST['prenom'];
   $quant = $_POST['quantity'];
-  $nom_prod = $_POST['nom_produit'];
 
-  //inserer le titre ,la description  et le nom de l'image dans la base de donnée 
-  $req4 = mysqli_query($bd,"INSERT INTO `commande` (nom_etudiant, prenom_etudiant, nom_produit, quantite_produit) VALUES ('$nom','$prenom','$nom_prod','$quant')");
+  $req4 = mysqli_query($bd, "SELECT id FROM produits WHERE id ='$id'");
 
-  if($req4) {
-    $message = '<p style="color:green">Produit acheté ! </p>';
-  }else {
+  if($req4){
+
+    $req5 = mysqli_query($bd, "SELECT id, nom_produit, prix FROM produits WHERE id ='$id';");
+
+    while($row = mysqli_fetch_assoc($req5)){
+      $achat = $row['prix'] * $quant;
+      $nom_produit = $row['nom_produit'];
+    }
     
+    $req5 = mysqli_query($bd,"INSERT INTO `commande` (nom_etudiant, prenom_etudiant, nom_produit, quantite_produit, achat) VALUES ('$nom','$prenom','$nom_produit','$quant','$achat')");
+
+     if($req5) {
+      $message = '<p style="color:green">Produit acheté !</p>';
+    }
+
   }
-
-
-
+  
 
 }
-
-
-
-
 
 ?>
 
@@ -64,11 +68,11 @@ if(isset($_POST['acheter'])){
                   <option value="">Aucun produit trouvé</option>;
                   </select>';
         }else{
-          echo '<select name="nom_produit"> ';
+          echo '<select name="id"> ';
           while($row = mysqli_fetch_assoc($req3)){
             //afficher les informations
             echo'
-              <option value="'.$row['nom_produit'].'">'.$row['nom_produit'] .' </option>
+              <option value="'.$row['id'].'">'.$row['nom_produit'] .' </option>
               ';
             
           }

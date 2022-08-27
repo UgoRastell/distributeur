@@ -14,7 +14,7 @@
             <a href="pages/commande.php">Commander</a>
             <div class="liste-produits">
                 <?php 
-                 //Nous allons afficher tous les produits ajouté :
+                 //afficher tous les produits ajouté :
                    //connexion à la base de données
                    $bd = mysqli_connect("localhost","root","","distributeur_nws");
                    $req3 = mysqli_query($bd , "SELECT * FROM produits");
@@ -23,7 +23,7 @@
                       echo " Aucun produit trouvé";
                    }else {//si oui
                        while($row = mysqli_fetch_assoc($req3)){
-                           //affichons les informations
+                           //afficher les informations
                            echo ' 
                            <div class="produit">
                                 <div class="image-prod">
